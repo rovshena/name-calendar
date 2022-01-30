@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\GrabberController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\UserProfileController;
@@ -50,5 +52,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/messages/mark-all/as-read', [MessageController::class, 'markAllAsRead'])->name('messages.mark-all-as-read');
         Route::resource('settings', SettingController::class)->except(['create', 'store', 'destroy']);
         Route::resource('users', UserController::class)->except(['show']);
+        Route::resource('grabbers', GrabberController::class)->only(['index', 'edit', 'update', 'destroy']);
+        Route::resource('translations', TranslationController::class)->only(['index', 'edit', 'update', 'destroy']);
     });
 });
