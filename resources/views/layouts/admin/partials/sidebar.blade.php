@@ -69,6 +69,18 @@
                             <span class="menu-text">{{ __('Users') }}</span>
                         </a>
                     </li>
+                    <li class="menu-item {{ Route::is('admin.grabbers*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.grabbers.index') }}" class="menu-link">
+                            <span class="menu-icon fas fa-broadcast-tower"></span>
+                            <span class="menu-text">{{ __('Grabbers') }}</span>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Route::is('admin.translations*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.translations.index') }}" class="menu-link">
+                            <span class="menu-icon fas fa-globe"></span>
+                            <span class="menu-text">{{ __('Translations') }}</span>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">
                             <span class="menu-icon fas fa-sign-out-alt"></span>
