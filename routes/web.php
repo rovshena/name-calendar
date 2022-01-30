@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\UserProfileController;
+use App\Http\Controllers\Automation\DataGrabberController;
+use App\Http\Controllers\Automation\DataTranslatorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\SiteController;
@@ -54,5 +56,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('users', UserController::class)->except(['show']);
         Route::resource('grabbers', GrabberController::class)->only(['index', 'edit', 'update', 'destroy']);
         Route::resource('translations', TranslationController::class)->only(['index', 'edit', 'update', 'destroy']);
+
+        // Route::get('translate', DataTranslatorController::class);
+        // Route::get('/grab', DataGrabberController::class);
     });
 });
