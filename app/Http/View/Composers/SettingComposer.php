@@ -9,7 +9,7 @@ class SettingComposer
 {
     public function compose(View $view)
     {
-        $variables = Setting::active()
+        $variables = Setting::enabled()
             ->whereIn('key', ['title', 'description', 'keyword', 'author', 'address', 'phone', 'fax', 'email'])
             ->get(['key', 'value']);
 
