@@ -16,7 +16,7 @@ class LocalizationController extends Controller
      */
     public function __invoke($locale)
     {
-        if (Arr::exists(config('app.available_locales', ['en']), $locale)) {
+        if (Arr::exists(config('app.available_locales', ['en' => 'English']), $locale)) {
             App::setLocale($locale);
             session()->put('locale', $locale);
         }
