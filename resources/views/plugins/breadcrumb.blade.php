@@ -26,7 +26,11 @@
                     <li class="breadcrumb-item active">{{ $breadcrumb['label'] }}</li>
                 @else
                     <li class="breadcrumb-item">
-                        <a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['label'] }}</a>
+                        @if(isset($breadcrumb['url']))
+                            <a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['label'] }}</a>
+                        @else
+                            <a href="javascript:void(0);">{{ $breadcrumb['label'] }}</a>
+                        @endif
                     </li>
                 @endif
             @endforeach
