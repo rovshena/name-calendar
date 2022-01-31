@@ -11,7 +11,5 @@
 @section('og.description', __('Privacy Policy') . ', ' . (Arr::exists($shared_settings, 'description') ? $shared_settings['description'] : ''))
 
 @section('content')
-    <section>
-        Privacy Policy
-    </section>
+
 @endsection

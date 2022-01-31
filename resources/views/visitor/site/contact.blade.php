@@ -11,7 +11,5 @@
 @section('og.description', __('Contact Us') . ', ' . (Arr::exists($shared_settings, 'description') ? $shared_settings['description'] : ''))
 
 @section('content')
-    <section>
-        Contact Us
-    </section>
+
 @endsection

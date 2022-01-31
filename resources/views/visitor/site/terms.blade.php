@@ -11,7 +11,5 @@
 @section('og.description', __('Terms Of Use') . ', ' . (Arr::exists($shared_settings, 'description') ? $shared_settings['description'] : ''))
 
 @section('content')
-    <section>
-        Terms Of Use
-    </section>
+
 @endsection
