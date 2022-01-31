@@ -34,6 +34,12 @@ Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::view('/contact', 'visitor.site.contact')->name('contact');
 Route::put('/contact', [SiteController::class, 'contact'])->name('contact.post')->middleware('throttle:contact');
 
+Route::get('/names', [HomeController::class, 'names'])->name('names');
+Route::get('/search-names', [HomeController::class, 'search'])->name('name.search');
+Route::get('/name/{translation}/show', [HomeController::class, 'showById'])->name('name.show-by-id');
+Route::get('/names/{link}', [HomeController::class, 'showByLink'])->name('name.show-by-link');
+Route::get('/compatibility/{first}/{second}', [HomeController::class, 'checkCompatibility'])->name('name.check-compatibility');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::middleware('guest')->group(function () {
