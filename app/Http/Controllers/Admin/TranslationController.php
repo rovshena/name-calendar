@@ -37,6 +37,25 @@ class TranslationController extends Controller
         return view('admin.translation.index');
     }
 
+    public function getNames(Request $request)
+    {
+        if ($request->ajax()) {
+            $term = trim($request->term);
+            $names = Translation::where('name', 'LIKE', "%". '"main":"' . $term ."%")->simplePaginate(30);
+            $names->map(function ($item) {
+                $temp = json_decode($item->name, true);
+                $item['temp_name'] = $temp['main'];
+                return $item;
+            });
+            return response()->json([
+                'results' => $names->pluck('temp_name', 'id'),
+                'hasMorePages' => $names->hasMorePages()
+            ]);
+        }
+
+        return false;
+    }
+
     public function edit(Translation $translation)
     {
         return view('admin.translation.edit', ['translation' => $translation]);

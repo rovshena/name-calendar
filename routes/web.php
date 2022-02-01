@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompatibilityController;
 use App\Http\Controllers\Admin\GrabberController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SettingController;
@@ -38,7 +39,7 @@ Route::get('/names', [HomeController::class, 'names'])->name('names');
 Route::get('/search-names', [HomeController::class, 'search'])->name('name.search');
 Route::get('/name/{translation}/show', [HomeController::class, 'showById'])->name('name.show-by-id');
 Route::get('/names/{link}', [HomeController::class, 'showByLink'])->name('name.show-by-link');
-Route::get('/compatibility/{first}/{second}', [HomeController::class, 'checkCompatibility'])->name('name.check-compatibility');
+Route::get('/compatibility/{first}/{second}', [HomeController::class, 'compatibility'])->name('name.compatibility');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -61,7 +62,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('settings', SettingController::class)->except(['create', 'store', 'destroy']);
         Route::resource('users', UserController::class)->except(['show']);
         Route::resource('grabbers', GrabberController::class)->only(['index', 'edit', 'update', 'destroy']);
+        Route::get('/get/names', [TranslationController::class, 'getNames'])->name('translations.get-names');
         Route::resource('translations', TranslationController::class)->only(['index', 'edit', 'update', 'destroy']);
+        Route::get('/compatibilities', [CompatibilityController::class, 'index'])->name('compatibilities.index');
+        Route::post('/compatibilities', [CompatibilityController::class, 'store'])->name('compatibilities.store');
+        Route::get('/compatibilities/{first}/{second}', [CompatibilityController::class, 'show'])->name('compatibilities.show');
+        Route::get('/compatibilities/{first}/{second}/edit', [CompatibilityController::class, 'edit'])->name('compatibilities.edit');
+        Route::put('/compatibilities/{first}/{second}', [CompatibilityController::class, 'update'])->name('compatibilities.update');
+        Route::delete('/compatibilities/{first}/{second}', [CompatibilityController::class, 'destroy'])->name('compatibilities.destroy');
 
         // Route::get('translate', DataTranslatorController::class);
         // Route::get('/grab', DataGrabberController::class);

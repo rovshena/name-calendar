@@ -14,10 +14,10 @@ $.ajaxSetup({
     }
 });
 
-$(document).ajaxStart(function() {
-    $('.preloader').show();
-});
-
-$(document).ajaxStop(function() {
-    $('.preloader').fadeOut();
-});
+// $(document).ajaxStart(function() {
+//     $('.preloader').show();
+// });
+//
+// $(document).ajaxStop(function() {
+//     $('.preloader').fadeOut();
+// });

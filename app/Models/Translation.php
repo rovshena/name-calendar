@@ -10,4 +10,14 @@ class Translation extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function firstCompatibilities()
+    {
+        return $this->hasMany(Compatibility::class, 'first_id', 'id');
+    }
+
+    public function secondCompatibilities()
+    {
+        return $this->hasMany(Compatibility::class, 'second_id', 'id');
+    }
 }

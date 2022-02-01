@@ -4,6 +4,18 @@
     </script>
 @endif
 
+@if (session()->has('info'))
+    <script>
+        toastr.info("{{ session('info') }}");
+    </script>
+@endif
+
+@if (session()->has('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
 @if (session()->has('error'))
     <script>
         toastr.error("{{ session('error') }}");

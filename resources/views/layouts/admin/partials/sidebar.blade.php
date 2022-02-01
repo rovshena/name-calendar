@@ -81,6 +81,12 @@
                             <span class="menu-text">{{ __('Translations') }}</span>
                         </a>
                     </li>
+                    <li class="menu-item {{ Route::is('admin.compatibilities*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.compatibilities.index') }}" class="menu-link">
+                            <span class="menu-icon fas fa-heart"></span>
+                            <span class="menu-text">{{ __('Compatibilities') }}</span>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">
                             <span class="menu-icon fas fa-sign-out-alt"></span>

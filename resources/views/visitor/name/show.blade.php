@@ -43,15 +43,23 @@ $main_name = json_decode($name->name, true)['main']
                                 <h4 class="mb-3">
                                     Name Compatibility
                                 </h4>
-                                <ul class="list-inline mb-0">
-                                    @foreach($randomNames as $randomName)
-                                        <li class="list-inline-item">
-                                            <a class="btn btn-outline-light btn-sm" href="{{ route('name.check-compatibility', ['first' => $main_name, 'second' => $randomName->temp_name]) }}">
-                                                {{ $randomName->temp_name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                @if(isset($compatibilities) && is_array($compatibilities) && count($compatibilities))
+                                    <ul class="list-inline mb-0">
+                                        @foreach($compatibilities as $compatibility)
+                                            <li class="list-inline-item">
+                                                <a class="btn btn-outline-light btn-sm" href="{{ route('name.compatibility', [$compatibility->first_id, $compatibility->second_id]) }}">
+                                                    @if($compatibility->first_name === $main_name)
+                                                        {{ $compatibility->second_name }}
+                                                    @else
+                                                        {{ $compatibility->first_name }}
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <i>Coming Soon</i>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -120,3 +120,7 @@
     50% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+.select2-container {
+    width: 100% !important;
+}

@@ -40,19 +40,19 @@ $request = request()->query();
                         <ul class="dropdown-menu" aria-labelledby="gender-names">
                             @foreach(['Female', 'Male'] as $gender)
                                 <li>
-                                    <a class="dropdown-item {{ isset($request['gender']) && $request['gender'] === strtolower($gender) ? 'active' : '' }}" href="{{ route('names', ['gender' => strtolower($gender)]) }}">{{ $gender }} Names</a>
+                                    <a class="dropdown-item {{ isset($request['gender']) && $request['gender'] === $gender ? 'active' : '' }}" href="{{ route('names', ['gender' => $gender]) }}">{{ $gender }} Names</a>
                                 </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ isset($request['nation']) ? 'active' : '' }}" href="javascript:void(0);" id="nation-names" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nation
+                        <a class="nav-link dropdown-toggle {{ isset($request['nationality']) ? 'active' : '' }}" href="javascript:void(0);" id="nationality-names" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nationality
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="nation-names">
-                            @foreach(['American', 'English', 'Arabic', 'Kazakh', 'Italian', 'Spanish', 'French', 'Hebrew', 'Armenian', 'Greek', 'German', 'Russian', 'Tatar', 'Ukrainian', 'Ossetian', 'Slavic', 'Japanese'] as $nation)
+                        <ul class="dropdown-menu" aria-labelledby="nationality-names">
+                            @foreach(['American', 'English', 'Arabic', 'Kazakh', 'Italian', 'Spanish', 'French', 'Hebrew', 'Armenian', 'Greek', 'German', 'Russian', 'Tatar', 'Ukrainian', 'Ossetian', 'Slavic', 'Japanese'] as $nationality)
                                 <li>
-                                    <a class="dropdown-item {{ isset($request['nation']) && $request['nation'] === strtolower($nation) ? 'active' : '' }}" href="{{ route('names', ['nation' => strtolower($nation)]) }}">{{ $nation }} Names</a>
+                                    <a class="dropdown-item {{ isset($request['nationality']) && $request['nationality'] === $nationality ? 'active' : '' }}" href="{{ route('names', ['nationality' => $nationality]) }}">{{ $nationality }} Names</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -64,7 +64,7 @@ $request = request()->query();
                         <ul class="dropdown-menu" aria-labelledby="religion-names">
                             @foreach(['Orthodox', 'Catholic', 'Muslim', 'Jewish'] as $religion)
                                 <li>
-                                    <a class="dropdown-item {{ isset($request['religion']) && $request['religion'] === strtolower($religion) ? 'active' : '' }}" href="{{ route('names', ['religion' => strtolower($religion)]) }}">{{ $religion }}</a>
+                                    <a class="dropdown-item {{ isset($request['religion']) && $request['religion'] === $religion ? 'active' : '' }}" href="{{ route('names', ['religion' => $religion]) }}">{{ $religion }}</a>
                                 </li>
                             @endforeach
                         </ul>

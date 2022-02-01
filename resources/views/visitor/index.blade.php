@@ -93,12 +93,12 @@
                     <div class="bg-light rounded-3 p-4">
                         <div class="tiny-slider arrow-round arrow-creative arrow-blur arrow-hover py-1">
                             <div class="tiny-slider-inner" data-autoplay="true" data-gutter="80" data-arrow="true" data-dots="false" data-items="4" data-items-lg="3" data-items-md="2" data-items-xs="1">
-                                @foreach(['American', 'English', 'Arabic', 'Kazakh', 'Italian', 'Spanish', 'French', 'Hebrew', 'Armenian', 'Greek', 'German', 'Russian', 'Tatar', 'Ukrainian', 'Ossetian', 'Slavic', 'Japanese'] as $nation)
+                                @foreach(['American', 'English', 'Arabic', 'Kazakh', 'Italian', 'Spanish', 'French', 'Hebrew', 'Armenian', 'Greek', 'German', 'Russian', 'Tatar', 'Ukrainian', 'Ossetian', 'Slavic', 'Japanese'] as $nationality)
                                     <div>
                                         <div class="d-flex align-items-center justify-content-center bg-body text-center rounded-2 border py-2 px-1 position-relative">
-                                            <img src="{{ asset('assets/images/flags/' . $nation . '.png') }}" class="h-40px" alt="">
-                                            <a href="{{ route('names', ['nation' => $nation]) }}" class="text-primary-hover stretched-link">
-                                                <span class="h6 ms-2"> {{ $nation }} Names </span>
+                                            <img src="{{ asset('assets/images/flags/' . $nationality . '.png') }}" class="h-40px" alt="">
+                                            <a href="{{ route('names', ['nationality' => $nationality]) }}" class="text-primary-hover stretched-link">
+                                                <span class="h6 ms-2"> {{ $nationality }} Names </span>
                                             </a>
                                         </div>
                                     </div>

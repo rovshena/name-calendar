@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compatibility;
 use App\Models\Translation;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class HomeController extends Controller
         if (!empty($request)) {
             foreach ($request as $key => $value) {
                 if ($key == 'religion') {
-                    $allowed_keys = ['jewish', 'orthodox', 'catholic', 'muslim'];
+                    $allowed_keys = ['Jewish', 'Orthodox', 'Catholic', 'Muslim'];
                     if (!in_array($value, $allowed_keys)) {
                         abort(404);
                     } else {
@@ -29,10 +30,10 @@ class HomeController extends Controller
                             $item['temp_name'] = isset($temp[$value]) ? $temp[$value] : $temp['main'];
                             return $item;
                         });
-                        $page_name = ucwords($value) . ' Names';
+                        $page_name = $value . ' Names';
                     }
-                } elseif ($key == 'nation') {
-                    $allowed_keys = ['american', 'english', 'arabic', 'kazakh', 'italian', 'spanish', 'french', 'hebrew', 'armenian', 'greek', 'german', 'russian', 'tatar', 'ukrainian', 'ossetian', 'slavic', 'japanese'];
+                } elseif ($key == 'nationality') {
+                    $allowed_keys = ['American', 'English', 'Arabic', 'Kazakh', 'Italian', 'Spanish', 'French', 'Hebrew', 'Armenian', 'Greek', 'German', 'Russian', 'Tatar', 'Ukrainian', 'Ossetian', 'Slavic', 'Japanese'];
                     if (!in_array($value, $allowed_keys)) {
                         abort(404);
                     } else {
@@ -42,10 +43,10 @@ class HomeController extends Controller
                             $item['temp_name'] = isset($temp[$value]) ? $temp[$value] : $temp['main'];
                             return $item;
                         });
-                        $page_name = ucwords($value) . " Names";
+                        $page_name = $value . " Names";
                     }
                 } elseif ($key == 'gender') {
-                    $allowed_keys = ['male', 'female'];
+                    $allowed_keys = ['Male', 'Female'];
                     if (!in_array($value, $allowed_keys)) {
                         abort(404);
                     } else {
@@ -55,7 +56,7 @@ class HomeController extends Controller
                             $item['temp_name'] = isset($temp[$value]) ? $temp[$value] : $temp['main'];
                             return $item;
                         });
-                        $page_name = ucwords($value) . " Names";
+                        $page_name = $value . " Names";
                     }
                 } elseif ($key == 'all') {
                     $names = Translation::all();
@@ -99,15 +100,13 @@ class HomeController extends Controller
 
     public function showById(Translation $translation)
     {
-        $randomNames = Translation::inRandomOrder()->limit(10)->get();
-        $randomNames->map(function ($item) {
-            $temp = json_decode($item->name, true);
-            $item['temp_name'] = $temp['main'];
-            return $item;
-        });
+        $compatibilities = Compatibility::where('first_id', $translation->id)
+            ->orWhere('second_id', $translation->id)
+            ->get()->all();
+
         return view('visitor.name.show', [
             'name' => $translation,
-            'randomNames' => $randomNames
+            'compatibilities' => $compatibilities
         ]);
     }
 
@@ -115,15 +114,14 @@ class HomeController extends Controller
     {
         $link = '/names/' . $link;
         $translation = Translation::where('link', $link)->firstOrFail();
-        $randomNames = Translation::inRandomOrder()->limit(10)->get();
-        $randomNames->map(function ($item) {
-            $temp = json_decode($item->name, true);
-            $item['temp_name'] = $temp['main'];
-            return $item;
-        });
+
+        $compatibilities = Compatibility::where('first_id', $translation->id)
+            ->orWhere('second_id', $translation->id)
+            ->get()->all();
+
         return view('visitor.name.show', [
             'name' => $translation,
-            'randomNames' => $randomNames
+            'compatibilities' => $compatibilities
         ]);
     }
 
@@ -142,13 +140,16 @@ class HomeController extends Controller
         ]);
     }
 
-    public function checkCompatibility($first, $second)
+    public function compatibility($first, $second)
     {
-        $compatibility = rand(75, 90);
+        $compatibility = Compatibility::where(function ($query) use ($first, $second) {
+            $query->where('first_id', $first)->where('second_id', $second);
+        })->orWhere(function ($query) use ($first, $second) {
+            $query->where('first_id', $second)->where('second_id', $first);
+        })->firstOrFail();
+
         return view('visitor.name.compatibility', [
-            'first' => $first,
-            'second' => $second,
-            'compatibility' => $compatibility
+            'compatibility' => $compatibility->load(['firstName', 'secondName'])
         ]);
     }
 }
