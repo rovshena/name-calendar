@@ -30,7 +30,7 @@ class UpdateTranslationRequest extends FormRequest
             'gender' => 'required|string|max:250',
             'nationality' => 'required|string|max:250',
             'letter' => 'required|string|max:5',
-            'religion' => 'string|max:250',
+            'religion' => 'string|max:250|nullable',
         ];
     }
 

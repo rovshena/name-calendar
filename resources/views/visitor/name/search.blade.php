@@ -39,13 +39,9 @@
                                     <div class="card shadow h-100">
                                         <div class="card-body">
                                             <h6 class="card-title mb-0">
-                                                @if ($name->articleBody === "-")
+                                                <a class="stretched-link" href="{{ route('name.show-by-id', $name) }}">
                                                     {{ $name->temp_name }}
-                                                @else
-                                                    <a href="{{ route('name.show-by-id', $name) }}">
-                                                        {{ $name->temp_name }}
-                                                    </a>
-                                                @endif
+                                                </a>
                                             </h6>
                                         </div>
                                     </div>

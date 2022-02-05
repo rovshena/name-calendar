@@ -8,7 +8,7 @@ use Illuminate\Validation\Rules\Password;
 class ChangePasswordRequest extends FormRequest
 {
     protected $stopOnFirstFailure = true;
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,14 +27,14 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
+            'current_password' => 'current_password:web',
             'password' => [
                 'bail',
                 'required',
                 'confirmed',
                 'string',
                 'max:250',
-                Password::min(8)->letters()->mixedCase()->numbers()->symbols(),
-                'current_password:web'
+                Password::min(8)->letters()->mixedCase()->numbers()->symbols()
             ],
         ];
     }
